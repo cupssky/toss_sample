@@ -1,0 +1,32 @@
+# ===================================================================
+# COMMON SPRING BOOT PROPERTIES
+# ===================================================================
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  devtools:
+    livereload:
+      enabled: true
+    freemarker:
+      cache: false
+  servlet:
+    multipart:
+      max-file-size: 128KB
+      max-request-size: 128KB
+
+# PROFILES
+spring.profiles.active: '@spring.profiles.active@'
+
+# Build Timestamp
+build.timestamp: '@build.timestamp@'
+
+# MANAGEMENT HTTP SERVER (ManagementServerProperties)
+# management.add-application-context-header: false
+
+#thymeleaf의  html5 기능 turn on
+spring.thymeleaf.mode: LEGACYHTML5
+
+# Actuator
+# management.context-path: /monitor
+# management.security.enabled: false
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<springProfile name="local">
+		<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+	</springProfile>
+
+	<springProfile name="!local">
+		<appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="FILE">
+			<encoder>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] %logger{40} - %msg%n
+				</pattern>
+			</encoder>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<fileNamePattern>C:\NICEQA\logs\qa_%d{yyyy-MM-dd}_%i.log
+				</fileNamePattern>
+				<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+					<maxFileSize>100MB</maxFileSize>
+				</timeBasedFileNamingAndTriggeringPolicy>
+				<maxHistory>60</maxHistory>
+			</rollingPolicy>
+		</appender>
+	</springProfile>
+
+	<springProfile name="local">
+		<logger level="INFO" name="sun" />
+		<logger level="INFO" name="org" />
+		<logger level="WARN" name="jdbc.sqlonly" />
+		<logger level="INFO" name="jdbc.sqltiming" />
+		<logger level="WARN" name="jdbc.audit" />
+		<logger level="ERROR" name="jdbc.resultset" />
+		<logger level="INFO" name="jdbc.resultsettable" />
+		<logger level="WARN" name="jdbc.connection" />
+		<logger level="DEBUG" name="kr.co.nicepay" />
+
+		<root level="DEBUG">
+			<appender-ref ref="CONSOLE" />
+		</root>
+	</springProfile>
+	<springProfile name="release">
+		<logger level="INFO" name="org.springframework" />
+		<logger level="INFO" name="sun" />
+		<logger level="INFO" name="org" />
+		<logger level="DEBUG" name="kr.co.nicepay" /> 
+		<root level="INFO">
+			<appender-ref ref="FILE" />
+		</root>
+	</springProfile>
+</configuration>

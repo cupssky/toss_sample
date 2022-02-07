@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>토스 카드 결제하기</title>
+	<!-- 스크립트 추가 -->
+	<script src="https://js.tosspayments.com/v1"></script>
+	<script type="text/javascript">
+		<!-- 클라이언트 키 추가 -->
+		var clientKey = 'test_ck_Wd46qopOB89j6y2NOw73ZmM75y0v';
+		var tossPayments = TossPayments(clientKey);
+		var random = Math.floor(Math.random() * 10) + 1;
+		<!-- 결제 함수 선언 -->
+		function requestCardPay() {
+			tossPayments.requestPayment('카드', {
+				  amount: 15000,
+				  orderId: 'TMP_' + random,
+				  orderName: '토스 티셔츠 외 2건',
+				  customerName: '박토스',
+				  successUrl: window.location.origin + '/success',
+				  failUrl: window.location.origin + '/fail',
+			});
+		}
+		
+		function requestVBankPay() {
+			tossPayments.requestPayment('가상계좌', {
+				  amount: 15000,
+				  orderId: 'TMP_' + random,
+				  orderName: '토스 티셔츠 외 2건',
+				  customerName: '박토스',
+				  successUrl: window.location.origin + '/success',
+				  failUrl: window.location.origin + '/fail',
+			});
+		}
+		
+		function requestCellphonePay() {
+			tossPayments.requestPayment('휴대폰', {
+				  amount: 15000,
+				  orderId: 'TMP_' + random,
+				  orderName: '토스 티셔츠 외 2건',
+				  customerName: '박토스',
+				  successUrl: window.location.origin + '/success',
+				  failUrl: window.location.origin + '/fail',
+			});
+		}
+	</script>
+</head>
+<body>
+	<button onclick="requestCardPay();">카드결제하기</button>
+	<button onclick="requestVBankPay();">가상계좌 결제하기</button>
+	<button onclick="requestCellphonePay();">휴대폰 결제하기</button>
+</body>
+</html>

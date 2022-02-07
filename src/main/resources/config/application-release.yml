@@ -1,0 +1,39 @@
+# ===================================================================
+# LOCAL SPRING BOOT PROPERTIES
+# ===================================================================
+
+# ===================================================================
+# APPLICATION
+# ===================================================================
+server.port: 9999
+
+# ===================================================================
+# LOGGING
+# ===================================================================
+logging.config: classpath:logback-spring.xml
+
+# ===================================================================
+# DATASOURCE 
+# ===================================================================
+spring:
+  datasource:
+      master:
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        jdbc-url: jdbc:log4jdbc:h2:tcp://172.27.103.218:9092/~/nice_qa;MODE=MySQL;
+        username: h2admin 
+        password: admin123
+        maximumPoolSize: 10
+        minimumIdle: 10
+        maxLifetime: 900000
+        connectionTimeout: 10000
+        connectionTestQuery: SELECT 1
+      slave:
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        jdbc-url: jdbc:log4jdbc:h2:tcp://172.27.103.218:9092/~/nice_qa;MODE=MySQL;
+        username: h2admin
+        password: admin123
+        maximumPoolSize: 10
+        minimumIdle: 10
+        maxLifetime: 900000
+        connectionTimeout: 10000
+        connectionTestQuery: SELECT 1

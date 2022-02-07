@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>결제결과</title>
+	<script type="text/javascript">
+		(function(){
+			init();
+		})();
+	
+		function init() {
+			var paymentKey = getParameter('paymentKey');
+			var amount = getParameter('amount');
+			var orderId = getParameter('orderId');	
+			
+			document.getElementById('paymentKey').innerHTML = paymentKey;
+			document.getElementById('amount').innerHTML = amount;
+			document.getElementById('orderId').innerHTML = orderId;
+		}
+		
+		function getParameter(name) {
+		    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		        results = regex.exec(location.search);
+		    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+	</script>
+</head>
+<body>
+	<h1>결제성공, 인증완료</h1>
+	<button onclick="init()">결과값 가져오기</button><br>
+	<b>paymentKey</b><p id="paymentKey"></p>
+	<b>amount </b><p id="amount"></p>
+	<b>orderId </b><p id="orderId"></p>
+</body>
+</html>

@@ -1,0 +1,50 @@
+package kr.co.nicepay.config;
+
+
+import static com.google.common.base.Predicates.or;
+import java.util.Collections;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import com.google.common.base.Predicate;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+/**
+ * <b>SwaggerConfig</b>
+ * 
+ * <pre>
+ * Swagger 컨피그
+ * </pre>
+ * <hr>
+ * 
+ * @author tgyun615
+ * 
+ * @version 0.1 2019. 9. 6
+ */
+//@Profile("!release")
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+
+  @Bean
+  public Docket api() {
+    return new Docket(DocumentationType.SWAGGER_2).select()
+                                                  .apis(RequestHandlerSelectors.any())
+                                                  .paths(paths())
+                                                  .build()
+                                                  .apiInfo(apiInfo()); 
+  }
+
+  private ApiInfo apiInfo() {
+    return new ApiInfo("토스 SAMPLE", null, "0.0.1", null, null, null, null,
+        Collections.emptyList());
+  }
+
+  private Predicate<String> paths() {
+    return or(PathSelectors.ant("/api/**"));
+  }
+}
